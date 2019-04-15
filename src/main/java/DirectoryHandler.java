@@ -19,7 +19,6 @@ public class DirectoryHandler {
         if (tempdir.exists()) {
             if (tempdir.isDirectory()) {
                 currentdir = new File(newdir);
-                System.out.println(getCurrentDirectory());
             } else {
                 System.out.println("Selected path is not a directory.");
             }
@@ -45,13 +44,7 @@ public class DirectoryHandler {
     public void outputFilesInCurrentDirectory() {
         Vector < String > out = new Vector < String > ();
         fillFilesInCurrentDirectory();
-        for (int i = 0; i < filesincurrentdir.length; i++) {
-            if (filesincurrentdir[i].isFile()) {
-                out.add("File:  " + filesincurrentdir[i].getAbsolutePath());
-            } else if (filesincurrentdir[i].isDirectory()) {
-                out.add("Dir:   " + filesincurrentdir[i].getAbsolutePath());
-            }
-        }
+        outputCustomDirectoryInfo(filesincurrentdir, out);
         Collections.sort(out);
         outputStringVector(out);
     }
@@ -62,13 +55,7 @@ public class DirectoryHandler {
             if (tempdir.isDirectory()) {
                 File[] filesinnewdir = filesOfCDirectory(tempdir);
                 Vector < String > out = new Vector < String > ();
-                for (int i = 0; i < filesinnewdir.length; i++) {
-                    if (filesinnewdir[i].isFile()) {
-                        out.add("File:  " + filesinnewdir[i].getAbsolutePath());
-                    } else if (filesinnewdir[i].isDirectory()) {
-                        out.add("Dir:   " + filesinnewdir[i].getAbsolutePath());
-                    }
-                }
+                outputCustomDirectoryInfo(filesinnewdir, out);
                 Collections.sort(out);
                 outputStringVector(out);
             } else {
@@ -76,6 +63,16 @@ public class DirectoryHandler {
             }
         } else {
             System.out.println("Selected path does not exist.");
+        }
+    }
+
+    private void outputCustomDirectoryInfo(File[] filesinnewdir, Vector<String> out) {
+        for (int i = 0; i < filesinnewdir.length; i++) {
+            if (filesinnewdir[i].isFile()) {
+                out.add("File:  " + filesinnewdir[i].getAbsolutePath());
+            } else if (filesinnewdir[i].isDirectory()) {
+                out.add("Dir:   " + filesinnewdir[i].getAbsolutePath());
+            }
         }
     }
 }

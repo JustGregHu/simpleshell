@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Vector;
 
 public class Main {
 
@@ -13,9 +14,11 @@ public class Main {
      *
      */
 
+    static BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
+
     public static void main(String[] args){
         boolean running=true;
-        BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
+
         Interpreter interpreter =  new Interpreter();
         if (!System.getProperty("os.name").toLowerCase().startsWith("windows")){
             System.out.println("Simpleshell only runs on Windows related operating systems. Press enter to exit.");
@@ -24,6 +27,7 @@ public class Main {
                 userInput.readLine();
             }
             catch(Exception e){
+                System.exit(0);
             }
         }
         while(running){
@@ -32,11 +36,37 @@ public class Main {
             }
             catch(Exception e){
                 System.out.println("Input error.");
+                e.printStackTrace();
             }
         }
     }
-    public static void clearScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
+
+    public static String extractQuotation(String inputString){
+        String quotation="";
+        if (inputString.contains("\\\"")){
+            inputString=inputString.split(" ")[1];
+            for (int i = 0; i <inputString.length() ; i++) {
+                if (inputString.charAt(i)!='\\')
+                    quotation+=inputString.charAt(i);
+            }
+        }
+        else if(inputString.contains("\"")) {
+            boolean quotationFound = false;
+            int quotationCount = 0;
+            for (int i = 0; i < inputString.length(); i++) {
+                if (quotationCount == 1) {
+                    quotation += inputString.charAt(i);
+                }
+                if (inputString.charAt(i) == '\"') {
+                    quotationFound = !quotationFound;
+                    quotationCount += 1;
+                }
+            }
+            quotation=quotation.substring(0,quotation.indexOf("\""));
+        }
+        else{
+            quotation=inputString.split(" ")[1];
+        }
+        return quotation;
     }
 }
