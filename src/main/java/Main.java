@@ -12,6 +12,7 @@ public class Main {
      * Tudjon külső parancsokat futtatni
      * Valósítsd meg a pipe műveletet (|). Például: echo "asd" | grep "s" kiírja az asd stringet, majd a kimenetet beleirányítja a grep "s" parancs bemenetébe
      *
+     * Mészáros Gergely, 2019-04-15
      */
 
     static BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));

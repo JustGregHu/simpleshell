@@ -23,6 +23,7 @@ public class Interpreter {
                 "|Quotation marks aren't required to interpret [string]\n" +
                 "+--------------------------+------------------------\n" +
                 "|help                      |Displays the current sheet.\n" +
+                "|echo [string]             |The console repeats the given string.\n"+
                 "|cd [directory]            |Change current directory.\n" +
                 "|dir                       |Lists all files found in the current directory.\n" +
                 "|dir [directory]           |Lists all files found in the provided directory.\n" +
@@ -40,7 +41,6 @@ public class Interpreter {
                 "|extract_quotation [string]|Displays the first quote found in the given string \n" +
                 "|exit                      |Exits this command line.\n" +
                 "+--------------------------+------------------------\n");
-
     }
 
     public void interpret(String inputString) {
