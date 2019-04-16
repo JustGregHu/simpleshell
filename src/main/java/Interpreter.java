@@ -1,7 +1,6 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
 public class Interpreter {
     DirectoryHandler directoryHandler;
     FileHandler fileHandler;

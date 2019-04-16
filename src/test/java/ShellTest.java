@@ -1,6 +1,4 @@
 import org.junit.jupiter.api.Test;
-
-import java.io.PrintWriter;
 import java.util.Vector;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
